@@ -103,8 +103,8 @@ public class HashTable<K, V> {
     private void printNodes(int index) {
         Node<K, V> current = arr[index];
         if (current == null) {
-            System.out.print(index + ": ");
-            System.out.println();
+            System.out.println(index + ": ");
+            System.out.println("----------------------------");
             return;
         }
         System.out.print(index + ": ");
