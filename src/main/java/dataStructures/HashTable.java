@@ -6,7 +6,7 @@ import static java.util.Objects.isNull;
 
 public class HashTable<K, V> {
 
-    @SuppressWarnings({})
+    @SuppressWarnings({"unchecked", "rawtype"})
     private Node<K, V>[] arr = new Node[16];
 
     private static class Node<K, V> {
