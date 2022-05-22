@@ -1,7 +1,5 @@
 package reflectionAPI;
 
-import lombok.SneakyThrows;
-
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
@@ -34,18 +32,20 @@ public class RandomFieldComparator<T> implements Comparator<T> {
      * @param o2
      * @return
      */
-
-    @SneakyThrows
     @Override
     public int compare(T o1, T o2) {
-        if (o1 == null) {
-            return 1;
-        } else if (o2 == null) {
-            return -1;
-        } else {
-            Comparable field1 = (Comparable) randomField.get(o1);
-            Comparable field2 = (Comparable) randomField.get(o2);
-            return field1.compareTo(field2);
+        try {
+            if (o1 == null) {
+                return 1;
+            } else if (o2 == null) {
+                return -1;
+            } else {
+                Comparable field1 = (Comparable) randomField.get(o1);
+                Comparable field2 = (Comparable) randomField.get(o2);
+                return field1.compareTo(field2);
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 
