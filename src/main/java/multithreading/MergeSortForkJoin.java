@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.RecursiveTask;
 
-public class MergeSortForkJoin<T extends Comparable<T>> extends RecursiveTask<List<T>> {
+public class MergeSortForkJoin<T extends Comparable<? super T>> extends RecursiveTask<List<? extends T>> {
     private List<T> list;
 
     public MergeSortForkJoin(List<T> list) {
@@ -27,7 +27,7 @@ public class MergeSortForkJoin<T extends Comparable<T>> extends RecursiveTask<Li
         return list;
     }
 
-    private void mergeResult(List<T> leftResult, List<T> rightResult) {
+    private void mergeResult(List<? extends T> leftResult, List<? extends T> rightResult) {
         var leftIndex = 0;
         var rightIndex = 0;
         var resultIndex = 0;
