@@ -10,8 +10,8 @@ public class Demo {
 
     public static void main(String[] args) {
         var list = generateArray(100_000);
-        MergeSortForkJoin<Integer> mergeSortForkJoin = new MergeSortForkJoin<>(list);
-        List<Integer> sortedList = ForkJoinPool.commonPool().invoke(mergeSortForkJoin);
+        MergeSortForkJoinRecursiveTask<Integer> mergeSortForkJoinRecursiveTask = new MergeSortForkJoinRecursiveTask<>(list);
+        List<Integer> sortedList = ForkJoinPool.commonPool().invoke(mergeSortForkJoinRecursiveTask);
         sortedList.forEach(System.out::println);
     }
 
