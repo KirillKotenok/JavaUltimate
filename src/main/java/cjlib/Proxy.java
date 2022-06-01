@@ -3,10 +3,13 @@ package cjlib;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+
 public class Proxy {
     public static void main(String[] args) {
-        Ukraine ukraineService = createMethodLoggingProxy(Ukraine.class);
-        ukraineService.hello(); // logs nothing to the console
+        Ukraine ukraineService = createMethodNullableProxy(Ukraine.class);
+        ukraineService.hello(null); // logs nothing to the console
         ukraineService.gloryToUkraine(); // logs method invocation to the console
     }
 
@@ -29,6 +32,25 @@ public class Proxy {
             return methodProxy.invokeSuper(object, args);
         });
 
+        return (T) enhancer.create();
+    }
+
+    public static <T> T createMethodNullableProxy(Class<T> targetClass) {
+        var enhancer = new Enhancer();
+        enhancer.setSuperclass(targetClass);
+
+        enhancer.setCallback((MethodInterceptor) (object, method, args, methodProxy) -> {
+            for (Method m : object.getClass().getDeclaredMethods()) {
+                Parameter[] parameters = m.getParameters();
+                for (int i = 0; i < parameters.length; i++) {
+                    if (parameters[i].isAnnotationPresent(NotNull.class) && args[i] == null) {
+                        throw new NullPointerException(String.format("Method %s parameter annotated by @NotNull annotation. " +
+                                "You must set correct parameter!", m.getName()));
+                    }
+                }
+            }
+            return methodProxy.invokeSuper(object, args);
+        });
         return (T) enhancer.create();
     }
 }

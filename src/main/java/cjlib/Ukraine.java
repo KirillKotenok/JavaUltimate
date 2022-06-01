@@ -1,8 +1,8 @@
 package cjlib;
 
 public class Ukraine {
-    public void hello() {
-        System.out.println("Good evening, we`re from Ukraine!");
+    public void hello(@NotNull String helloMessage) {
+        System.out.println(helloMessage);
     }
 
     @LogInvocation
