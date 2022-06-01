@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.RecursiveTask;
 
-public class MergeSortForkJoin<T extends Number & Comparable<T>> extends RecursiveTask<List<T>> {
+public class MergeSortForkJoin<T extends Comparable<T>> extends RecursiveTask<List<T>> {
     private List<T> list;
-    private int size;
 
     public MergeSortForkJoin(List<T> list) {
         this.list = list;
-        this.size = list.size();
     }
 
     @Override
