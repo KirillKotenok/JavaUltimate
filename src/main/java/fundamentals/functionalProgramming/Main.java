@@ -1,4 +1,4 @@
-package functionalProgramming;
+package fundamentals.functionalProgramming;
 
 import java.util.function.IntToDoubleFunction;
 import java.util.function.LongConsumer;

@@ -1,4 +1,4 @@
-package dataStructuresAndAlgoritms;
+package fundamentals.dataStructuresAndAlgoritms;
 
 import java.util.Objects;
 import java.util.Stack;

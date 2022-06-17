@@ -1,10 +1,10 @@
-package generic;
+package fundamentals.generic;
 
-public class Dog extends Animal {
+public class Cat extends Animal {
     String name;
     Number age;
 
-    public Dog(String name, Number age) {
+    public Cat(String name, Number age) {
         super(name, age);
         this.name = name;
         this.age = age;
@@ -30,3 +30,4 @@ public class Dog extends Animal {
         this.age = age;
     }
 }
+

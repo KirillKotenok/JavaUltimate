@@ -1,4 +1,4 @@
-package dataStructuresAndAlgoritms;
+package fundamentals.dataStructuresAndAlgoritms;
 
 import lombok.NonNull;
 

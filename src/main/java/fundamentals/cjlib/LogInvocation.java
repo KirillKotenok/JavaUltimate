@@ -1,4 +1,4 @@
-package cjlib;
+package fundamentals.cjlib;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

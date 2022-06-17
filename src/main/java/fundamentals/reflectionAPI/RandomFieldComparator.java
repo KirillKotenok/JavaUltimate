@@ -1,4 +1,4 @@
-package reflectionAPI;
+package fundamentals.reflectionAPI;
 
 import java.lang.reflect.Field;
 import java.util.Comparator;

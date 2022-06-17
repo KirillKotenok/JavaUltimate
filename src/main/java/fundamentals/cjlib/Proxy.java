@@ -1,4 +1,4 @@
-package cjlib;
+package fundamentals.cjlib;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;

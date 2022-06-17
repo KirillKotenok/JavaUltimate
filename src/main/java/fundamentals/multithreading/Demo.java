@@ -1,4 +1,4 @@
-package multithreading;
+package fundamentals.multithreading;
 
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;

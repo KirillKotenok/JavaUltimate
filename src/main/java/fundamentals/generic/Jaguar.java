@@ -1,4 +1,4 @@
-package generic;
+package fundamentals.generic;
 
 public class Jaguar extends Cat {
     String name;
