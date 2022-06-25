@@ -1,4 +1,4 @@
-package web;
+package web.httpRequest;
 
 import lombok.SneakyThrows;
 

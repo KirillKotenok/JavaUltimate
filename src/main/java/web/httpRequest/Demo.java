@@ -1,4 +1,4 @@
-package web;
+package web.httpRequest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.SneakyThrows;
@@ -11,9 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Demo {
     private static final String NASA_URLS = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=15&api_key=DEMO_KEY";
@@ -53,18 +51,4 @@ public class Demo {
 
         return node.findValuesAsText("img_src");
     }
-
-
-    private static Map<String, Long> collectAllPhotoSize() {
-        var photos = getPhotoUrls(NASA_URLS);
-
-/*        photos.stream()
-                .collect(toMap(Function.identity(), getPhotoSize(identity())))*/
-        return new HashMap<>();
-    }
-
-    /*@SneakyThrows
-    private static Long getPhotoSize(String photoUrl) {
-
-    }*/
 }

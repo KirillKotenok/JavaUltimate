@@ -1,4 +1,4 @@
-package web;
+package web.httpRequest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,11 +52,11 @@ public class NasaPhotosUtil {
                 .collect(Collectors.toMap(Function.identity(), photoUrl -> getPhotoSize(client, photoUrl)));
     }
 
-    public static Map<String, Long> photosSizeByUrlUsingRestTemplate() {
-        var photos = getPhotoUrlsUsingWithRestTemplate();
-        /*        new CompletableFuture<>().applyToEither()*/
+    public static Photos photosSizeByUrlUsingRestTemplate() {
+        var photosUrl = getPhotoUrlsUsingWithRestTemplate();
 
-        return new HashMap<>();
+
+        return new Photos();
     }
 
     @SneakyThrows
