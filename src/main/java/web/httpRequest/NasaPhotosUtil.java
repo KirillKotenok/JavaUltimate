@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.UnknownContentTypeException;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -19,11 +19,13 @@ public class NasaPhotosUtil {
     public static final String NASA_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=15&api_key=DEMO_KEY";
 
     public static void main(String[] args) {
-        var maxSizePhoto = photosSizeByUrlUsingHttpClient().entrySet().stream()
+        getPhotosSizeByUrlUsingRestTemplate().getPhotos().stream()
+                .forEach(System.out::println);
+       /* var maxSizePhoto = photosSizeByUrlUsingHttpClient().entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .get();
         System.out.println(maxSizePhoto.getKey());
-        System.out.println(maxSizePhoto.getValue());
+        System.out.println(maxSizePhoto.getValue());*/
     }
 
     @SneakyThrows
@@ -38,10 +40,10 @@ public class NasaPhotosUtil {
                 .findValuesAsText("img_src");
     }
 
-    public static List<String> getPhotoUrlsUsingWithRestTemplate() {
+    public static Photos getPhotoUrlsUsingWithRestTemplate() {
         var restTemplate = new RestTemplate();
-        var node = restTemplate.getForObject(URI.create(NASA_URL), JsonNode.class);
-        return node.findValuesAsText("img_src");
+        var photos = restTemplate.getForObject(URI.create(NASA_URL), Photos.class);
+        return photos;
     }
 
     public static Map<String, Long> photosSizeByUrlUsingHttpClient() {
@@ -52,11 +54,27 @@ public class NasaPhotosUtil {
                 .collect(Collectors.toMap(Function.identity(), photoUrl -> getPhotoSize(client, photoUrl)));
     }
 
-    public static Photos photosSizeByUrlUsingRestTemplate() {
-        var photosUrl = getPhotoUrlsUsingWithRestTemplate();
+    public static Photos getPhotosSizeByUrlUsingRestTemplate() {
+        var photos = getPhotoUrlsUsingWithRestTemplate();
+        var restTemplate = new RestTemplate();
+        for (Photo photo : photos.getPhotos()) {
+            var photoSize = "";
+            try {
+                photoSize = restTemplate.getForObject(URI.create(photo.getUrl()), JsonNode.class)
+                        .findValue("Content-Length")
+                        .asText();
+            } catch (UnknownContentTypeException e) {
+                var redirectLocation = e.getResponseHeaders().getLocation();
+                System.out.printf("\nRedirect to %s...\n", redirectLocation);
+                var photoResult = restTemplate.getForObject(redirectLocation, byte[].class);
+                photoSize = restTemplate.headForHeaders(redirectLocation).getFirst("Content-Length");
 
-
-        return new Photos();
+                photo.setPhoto(photoResult);
+                photo.setSize(Long.parseLong(photoSize));
+            }
+            photo.setSize(Long.parseLong(photoSize));
+        }
+        return photos;
     }
 
     @SneakyThrows
