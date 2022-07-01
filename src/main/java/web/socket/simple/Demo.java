@@ -1,4 +1,4 @@
-package web.socket;
+package web.socket.simple;
 
 import lombok.Cleanup;
 import lombok.SneakyThrows;

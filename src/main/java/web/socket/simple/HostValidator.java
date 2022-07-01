@@ -1,4 +1,4 @@
-package web.socket;
+package web.socket.simple;
 
 import static org.apache.commons.lang3.StringUtils.contains;
 

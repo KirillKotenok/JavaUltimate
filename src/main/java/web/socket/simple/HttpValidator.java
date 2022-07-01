@@ -1,4 +1,4 @@
-package web.socket;
+package web.socket.simple;
 
 import java.util.regex.Pattern;
 
