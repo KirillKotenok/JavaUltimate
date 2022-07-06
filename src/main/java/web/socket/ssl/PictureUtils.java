@@ -44,10 +44,9 @@ public class PictureUtils {
 
     @SneakyThrows
     private static Collection<String> getPictureUrls() {
-        try (var socket = SSLSocketFactory.getDefault().createSocket(NASA_API_HOST, DEFAULT_PORT)) {
-            var responseBody = SocketUtils.doGet(socket, NASA_BREAKPOINT);
-            return getPhotosUrlFromResponseBody(responseBody);
-        }
+        @Cleanup var socket = SSLSocketFactory.getDefault().createSocket(NASA_API_HOST, DEFAULT_PORT);
+        var responseBody = SocketUtils.doGet(socket, NASA_BREAKPOINT);
+        return getPhotosUrlFromResponseBody(responseBody);
     }
 
     @SneakyThrows
