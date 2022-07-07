@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toMap;
 
 @UtilityClass
 public class PictureUtils {
-    private static final String NASA_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=16&api_key=DEMO_KEY";
+    private static final String NASA_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=16&api_key=Cpr2Rp2XK8uqHU4MHIs5OPOJKia7irsIuoCk2pXu";
     private static final Map<String, Long> pictureMap = new HashMap<>();
 
     static {
