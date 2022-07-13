@@ -1,11 +1,13 @@
-package web.spring.largestPictureUsingSpring.service;
+package web.spring.largestPictureService.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import web.spring.largestPictureUsingSpring.entity.Photo;
-import web.spring.largestPictureUsingSpring.entity.Photos;
+import org.springframework.web.util.UriComponentsBuilder;
+import web.spring.largestPictureService.entity.Photo;
+import web.spring.largestPictureService.entity.Photos;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -14,13 +16,19 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PictureServiceImpl implements PictureService {
     private transient final RestTemplate restTemplate;
-    private final String baseUrlTemplate = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=%s&api_key=Cpr2Rp2XK8uqHU4MHIs5OPOJKia7irsIuoCk2pXu";
+    @Value("${nasa.base.url}")
+    private String baseUrl;
+    @Value("${nasa.api.key}")
+    private String apiKey;
 
     @Override
     @Cacheable("largestPicture")
     public Photo getLargestPicture(String sol) {
-        var baseUrl = String.format(baseUrlTemplate, sol);
-        return generatePhotosFromJson(baseUrl).getPhotos().stream()
+        var requestUrl = UriComponentsBuilder.fromUriString(baseUrl)
+                .queryParam("sol", sol)
+                .queryParam("api_key", apiKey)
+                .toUriString();
+        return generatePhotosFromJson(requestUrl).getPhotos().stream()
                 .peek(this::setPictureSize)
                 .max(Comparator.comparing(Photo::getSize))
                 .get();

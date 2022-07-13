@@ -1,4 +1,4 @@
-package web.spring.largestPictureUsingSpring.config;
+package web.spring.largestPictureService.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

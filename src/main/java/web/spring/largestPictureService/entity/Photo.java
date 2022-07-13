@@ -1,4 +1,4 @@
-package web.spring.largestPictureUsingSpring.entity;
+package web.spring.largestPictureService.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
