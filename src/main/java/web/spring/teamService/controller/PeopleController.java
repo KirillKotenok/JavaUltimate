@@ -1,8 +1,8 @@
-package demo.controller;
+package web.spring.teamService.controller;
 
-import demo.entity.People;
-import demo.entity.Team;
-import demo.service.PeopleService;
+import web.spring.teamService.entity.People;
+import web.spring.teamService.entity.Team;
+import web.spring.teamService.service.PeopleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

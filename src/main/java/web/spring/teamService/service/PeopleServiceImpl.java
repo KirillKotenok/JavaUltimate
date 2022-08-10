@@ -1,9 +1,9 @@
-package demo.service;
+package web.spring.teamService.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import demo.entity.People;
-import demo.entity.Team;
-import demo.entity.Teams;
+import web.spring.teamService.entity.People;
+import web.spring.teamService.entity.Team;
+import web.spring.teamService.entity.Teams;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

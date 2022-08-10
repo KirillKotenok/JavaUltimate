@@ -1,4 +1,4 @@
-package demo.entity;
+package web.spring.teamService.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

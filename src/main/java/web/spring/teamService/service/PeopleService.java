@@ -1,7 +1,7 @@
-package demo.service;
+package web.spring.teamService.service;
 
-import demo.entity.People;
-import demo.entity.Team;
+import web.spring.teamService.entity.People;
+import web.spring.teamService.entity.Team;
 
 import java.util.Optional;
 
